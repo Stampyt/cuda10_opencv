@@ -56,20 +56,10 @@ RUN apt-get update && apt-get install -y \
 		libeigen3-dev
 
 RUN apt-get update
-#RUN apt-get -f install -y python3-distutils
 RUN apt-get install -y python3-requests
 RUN apt-get install -y default-jdk &&\
      rm -rf /var/lib/apt/lists/*
 
-# Install pip
-RUN apt-get update && apt-get install -y python3-pip
-RUN pip3 install --upgrade pip
-
-RUN apt-get update && apt-get install -y libgoogle-glog-dev libatlas-base-dev
-RUN apt-get install -y libspqr2.0.2
-RUN apt-get install -y libcxsparse3.1.4
-RUN apt-get install -y libboost-python-dev
-RUN apt-get install -y libpython3.6-dev
 RUN cd ~ &&\
     git clone https://github.com/Itseez/opencv.git &&\
     wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip &&\
@@ -81,6 +71,20 @@ RUN cd ~ &&\
     make install &&\
     cd ~ &&\
     rm -rf opencv opencv-2.4.9 opencv-2.4.9.zip
+
+
+# Install pip
+RUN apt-get update && apt-get install -y python3-pip
+RUN pip3 install --upgrade pip
+
+RUN apt-get update && apt-get install -y libgoogle-glog-dev libatlas-base-dev
+RUN apt-get install -y libspqr2.0.2
+RUN apt-get install -y libcxsparse3.1.4
+RUN apt-get install -y libboost-python-dev
+RUN apt-get install -y libpython3.6-dev
+RUN apt-get install libcgal-dev -y
+
+
 
 # Install useful Python packages using apt-get to avoid version incompatibilities with Tensorflow binary
 # especially numpy, scipy, skimage and sklearn (see https://github.com/tensorflow/tensorflow/issues/2034)
